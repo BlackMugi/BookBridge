@@ -1,0 +1,50 @@
+.suivi-container {
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+.suivi-container h1 {
+    margin-bottom: 2rem;
+    color: white;
+    text-align: center;
+}
+
+.suivi-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.suivi-table th, .suivi-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.suivi-table th {
+    background-color: #5767aa;
+    color: white;
+}
+
+.suivi-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Couleurs selon le statut */
+.statut.en-cours {
+    color: orange;
+    font-weight: bold;
+}
+
+.statut.terminée {
+    color: green;
+    font-weight: bold;
+}
+
+.statut.en-attente {
+    color: red;
+    font-weight: bold;
+}

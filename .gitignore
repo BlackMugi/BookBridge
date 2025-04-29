@@ -1,0 +1,23 @@
+# === BACKEND (Spring Boot) ===
+/restfull/target/
+/restfull/.classpath
+/restfull/.project
+/restfull/.settings
+*.log
+
+# === FRONTEND (React) ===
+/bookbridge-frontend/node_modules/
+/bookbridge-frontend/build/
+/bookbridge-frontend/.env
+/bookbridge-frontend/.DS_Store
+
+# === SYSTEM FILES ===
+*.iml
+*.swp
+*.swo
+*.bak
+*.tmp
+*.idea/
+*.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,91 @@
+.qui-sommes-nous {
+    padding: 2rem;
+    min-height: 80vh;
+    align-items: center;
+}
+
+.qui-sommes-nous h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Sections générales */
+section {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.intro{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9 ;
+    width: 70%;
+    align-items: center;
+}
+
+.section-box{
+     align-items: center;
+     display: flex;
+     justify-content: center;
+}
+/* Images principales */
+.intro img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Titres de sections */
+section h2 {
+    color: #5767aa;
+    margin-bottom: 1rem;
+}
+
+/* Paragraphes */
+section p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Section équipe */
+.membre ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 100px 50px 100px;
+}
+
+.membre li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    color: #c1c1c1;
+}
+
+/* Images des membres */
+.membre li img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #5767aa;
+}
+
+/* Noms en gras */
+.membre li strong {
+    display: block;
+    color: white;
+}

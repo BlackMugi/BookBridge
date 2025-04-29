@@ -1,0 +1,28 @@
+.politique-confidentialite {
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+.politique-confidentialite h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.politique-confidentialite section {
+    margin-bottom: 2.5rem;
+}
+
+.politique-confidentialite section h2 {
+    color: #d7d7d7;
+    margin-bottom: 1rem;
+}
+
+.politique-confidentialite section p {
+    color: #c1c1c1;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+}

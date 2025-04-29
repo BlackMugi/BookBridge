@@ -1,0 +1,74 @@
+.ajouter-livre {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto 0 550px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ajouter-livre h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  form input[type="text"],
+  form input[type="number"],
+  form input[type="file"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="number"]:focus {
+    border-color: #4CAF50;
+  }
+  
+  form input[type="file"] {
+    padding: 5px;
+  }
+  
+  form button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  
+  form button:active {
+    background-color: #388e3c;
+  }
+  
