@@ -16,7 +16,7 @@ function Navbar() {
     localStorage.removeItem("role");
 
     // Redirige vers la page de connexion
-    navigate("/connexion");
+    navigate("/authentification/connexion");
   };
 
   return (
@@ -41,7 +41,7 @@ function Navbar() {
           <button className="Link" onClick={handleLogout}>Déconnexion</button>
         ) : (
           // Sinon, affiche un lien vers la page de connexion
-          <Link className="login-button" to="/authetification/connexion">Connexion</Link>
+          <Link className="login-button" to="/authentification/connexion">Se connecter</Link>
         )}
       </nav>
     </header>

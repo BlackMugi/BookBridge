@@ -12,7 +12,7 @@ function SidebarAdmin() {
     localStorage.removeItem("role");
 
     // Rediriger vers la page de connexion
-    navigate("/authetification/connexion");
+    navigate("/authentification/connexion");
   };
 
   return (

@@ -18,14 +18,15 @@ import GererExemplaires from "./pages/admin/GererExemplaires";
 import GererRoles from "./pages/admin/GererRoles";
 import Inscription from "./pages/authetification/Inscription";
 import Connexion from "./pages/authetification/Connexion";
+import PrivateRoute from "./routes/PrivateRoute";
+import AdminRoute from "./routes/AdminRoute";
 
 import "./App.css";
 
 function App() {
-  const location = useLocation(); // 👈 On récupère l'URL actuelle
+  const location = useLocation();
 
-  // 👇 On vérifie si on est dans l'admin
-  const isAdminRoute = location.pathname.startsWith("/admin") || location.pathname.startsWith("/authetification");
+  const isAdminRoute = location.pathname.startsWith("/admin") || location.pathname.startsWith("/authentification");
 
   return (
     <>
@@ -35,20 +36,49 @@ function App() {
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/authetification/inscription" element={<Inscription />} />
-          <Route path="/authetification/connexion" element={<Connexion />} />
+          <Route path="/authentification/connexion" element={<Connexion />} />
           <Route path="/bibliotheque" element={<Bibliotheque />} />
-          <Route path="/detail" element={<Detail />} />
-          <Route path="/suivi-du-statut" element={<SuiviStatut />} />
           <Route path="/aide-et-assistance" element={<AideEtAssistance />} />
           <Route path="/qui-somme-nous" element={<QuiSommesNous />} />
           <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
           <Route path="/mention-legale" element={<MentionsLegales />} />
           <Route path="/foire-aux-questions" element={<Faq />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/ajouter-un-livre" element={<AjouterLivre />} />
-          <Route path="/admin/gerer-un-livre" element={<GererLivres />} />
-          <Route path="/admin/gerer-un-exemplaire" element={<GererExemplaires />} />
-          <Route path="/admin/gerer-role" element={<GererRoles />} />
+
+          {/*On va protéger notre route pour que seule les utilisateurs connectés y ont acces */}
+          <Route
+            path="/suivi-du-statut"
+            element={
+              <PrivateRoute>
+                <SuiviStatut />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/detail"
+            element={
+              <PrivateRoute>
+                <Detail />
+              </PrivateRoute>
+            }
+          />
+
+          {/*On va protéger notre route pour que seule les bibliothécaire y ont acces */}
+          <Route path="/admin/dashboard" element={
+            <AdminRoute><Dashboard /></AdminRoute>
+          } />
+          <Route path="/admin/ajouter-un-livre" element={
+            <AdminRoute><AjouterLivre /></AdminRoute>
+          } />
+          <Route path="/admin/gerer-un-livre" element={
+            <AdminRoute><GererLivres /></AdminRoute>
+          } />
+          <Route path="/admin/gerer-un-exemplaire" element={
+            <AdminRoute><GererExemplaires /></AdminRoute>
+          } />
+          <Route path="/admin/gerer-role" element={
+            <AdminRoute><GererRoles /></AdminRoute>
+          } />
+
         </Routes>
       </main>
 
@@ -57,7 +87,6 @@ function App() {
   );
 }
 
-// Très important : Router doit englober App
 export default function AppWithRouter() {
   return (
     <Router>

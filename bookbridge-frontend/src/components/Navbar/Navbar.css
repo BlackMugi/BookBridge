@@ -13,6 +13,7 @@
 	--secondaryColor: #db2b39;
 	--textColor: #eee;
     --searchColor: rgba(255, 255, 255, 0.25);
+    --glaceSearch: rgb(255, 255, 255, 0.1);
 }
 
 
@@ -47,11 +48,12 @@ header {
     padding: 5px 15px;
     border-radius: 20px;
     justify-content: space-between;
+    margin-top: 25px;
 }
 
 .search-input {
     border: none;
-    background: transparent;
+    background: var(--glaceSearch);
     outline: none;
     color: white;
     padding: 5px;
