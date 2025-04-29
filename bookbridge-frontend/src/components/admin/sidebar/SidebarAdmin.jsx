@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../../assets/styles/SidebarAdmin.css"; // Ton style perso ici !
+import "../../../assets/styles/SidebarAdmin.css";
 
 function SidebarAdmin() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ function SidebarAdmin() {
     localStorage.removeItem("role");
 
     // Rediriger vers la page de connexion
-    navigate("/connexion");
+    navigate("/authetification/connexion");
   };
 
   return (
