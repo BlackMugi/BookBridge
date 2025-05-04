@@ -2,8 +2,9 @@ package sn.edu.bookbridge.restfull.util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import sn.edu.bookbridge.restfull.model.Utilisateur;
+
 import org.springframework.stereotype.Component;
-import sn.edu.bookbridge.restfull.entity.Utilisateur;
 
 import java.util.Date;
 

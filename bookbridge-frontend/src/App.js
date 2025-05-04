@@ -1,3 +1,4 @@
+//Nos routes Basiques
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -11,15 +12,25 @@ import QuiSommesNous from "./pages/QuiSommesNous";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import MentionsLegales from "./pages/MentionsLegales";
 import Faq from "./pages/Faq";
+
+//Nos Routes pour les Bibliothécaires
 import Dashboard from "./pages/admin/Dashboard";
 import AjouterLivre from "./pages/admin/AjouterLivre";
 import GererLivres from "./pages/admin/GererLivres";
 import GererExemplaires from "./pages/admin/GererExemplaires";
+import AjouterExemplaire from "./pages/admin/AjouterExemplaire";
 import GererRoles from "./pages/admin/GererRoles";
-import Inscription from "./pages/authetification/Inscription";
-import Connexion from "./pages/authetification/Connexion";
+import ModifierLivre from "./pages/admin/ModifierLivre";
+import ModifierExemplaire from "./pages/admin/ModifierExemplaire";
+
+//Nos Routes Pour l'Authentification
+import Inscription from "./pages/authentification/Inscription";
+import Connexion from "./pages/authentification/Connexion";
+
+//Importation pour securiser nos routes
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
+
 
 import "./App.css";
 
@@ -35,7 +46,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Accueil />} />
-          <Route path="/authetification/inscription" element={<Inscription />} />
+          <Route path="/authentification/inscription" element={<Inscription />} />
           <Route path="/authentification/connexion" element={<Connexion />} />
           <Route path="/bibliotheque" element={<Bibliotheque />} />
           <Route path="/aide-et-assistance" element={<AideEtAssistance />} />
@@ -72,8 +83,17 @@ function App() {
           <Route path="/admin/gerer-un-livre" element={
             <AdminRoute><GererLivres /></AdminRoute>
           } />
+          <Route path="/admin/modifier-un-livre/:id" element={
+            <AdminRoute><ModifierLivre /></AdminRoute>
+          } />
+            <Route path="/admin/modifier-un-exemplaire/:id" element={
+            <AdminRoute><ModifierExemplaire /></AdminRoute>
+          } />
           <Route path="/admin/gerer-un-exemplaire" element={
             <AdminRoute><GererExemplaires /></AdminRoute>
+          } />
+             <Route path="/admin/ajouter-un-exemplaire" element={
+            <AdminRoute><AjouterExemplaire /></AdminRoute>
           } />
           <Route path="/admin/gerer-role" element={
             <AdminRoute><GererRoles /></AdminRoute>

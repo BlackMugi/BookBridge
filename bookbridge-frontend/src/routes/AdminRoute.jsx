@@ -6,7 +6,7 @@ const AdminRoute = ({ children }) => {
 
   const isAdmin = token && role === "bibliothecaire";
 
-  return isAdmin ? children : <Navigate to="/authetification/connexion" />;
+  return isAdmin ? children : <Navigate to="/authentification/connexion" />;
 };
 
 export default AdminRoute;

@@ -1,4 +1,4 @@
-package sn.edu.bookbridge.restfull.entity;
+package sn.edu.bookbridge.restfull.model;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;

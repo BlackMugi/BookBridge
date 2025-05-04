@@ -1,64 +1,82 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import LivreCard from "../components/LivreCard/LivreCard";
 import "../assets/styles/Bibliotheque.css";
 
 function Bibliotheque() {
-  const navigate = useNavigate();
+    const [livres, setLivres] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState(""); // Pour la recherche
+    const livresParPage = 16;
 
-  const livres = [
-    {
-      id: 1,
-      titre: "Le Petit Prince",
-      image: "/imageLivre/lepetitprince.jpg",
-      auteur: "Antoine de Saint-Exupéry",
-      annee: 1943,
-      maisonEdition: "Gallimard",
-      categorie: "Conte philosophique",
-      isbn: "978-2070612758",
-    },
-    {
-      id: 2,
-      titre: "1984",
-      image: "/imageLivre/1984.jpg",
-      auteur: "George Orwell",
-      annee: 1949,
-      maisonEdition: "Secker and Warburg",
-      categorie: "Dystopie",
-      isbn: "978-0451524935",
-    },
-    {
-      id: 3,
-      titre: "Harry Potter",
-      image: "/imageLivre/harrypotter.jpg",
-      auteur: "J.K. Rowling",
-      annee: 1997,
-      maisonEdition: "Bloomsbury",
-      categorie: "Fantasy",
-      isbn: "978-0747532743",
-    },
-  ];
+    useEffect(() => {
+        fetch("http://localhost:8080/api/livres")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Données reçues :", data);
+                setLivres(data);
+            })
+            .catch((error) => console.error("Erreur lors du chargement des livres :", error));
+    }, []);
 
-  const goToDetail = (livre) => {
-    navigate("/detail", { state: { livre } }); // Passe les infos du livre à la page Détail
-  };
+    // Filtrage des livres qui sont disponibles
+    const livresDisponibles = livres.filter((livre) => livre.disponibilite >= 1);
 
-  return (
-    <div className="bibliotheque">
-      <h1 className="titre-page">Découvrez Notre Collection 📚</h1>
+    // Filtrage des livres en fonction du terme de recherche
+    const livresFiltres = livresDisponibles.filter((livre) => {
+        return livre.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               livre.auteur.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
-      <div className="livres-grid">
-        {livres.map((livre) => (
-          <div key={livre.id} className="livre-card">
-            <img src={livre.image} alt={livre.titre} className="livre-image" />
-            <h2 className="livre-titre">{livre.titre}</h2>
-            <button onClick={() => goToDetail(livre)} className="btn-voir-detail">
-              Voir Détail
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    // Pagination
+    const indexOfLast = currentPage * livresParPage;
+    const indexOfFirst = indexOfLast - livresParPage;
+    const livresActuels = livresFiltres.slice(indexOfFirst, indexOfLast);
+    const totalPages = Math.ceil(livresFiltres.length / livresParPage);
+
+    const nextPage = () => {
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+
+    return (
+        <div className="bibliotheque-container">
+            <h1>Ma Bibliothèque</h1>
+            <div className="search-contain">
+                <input
+                    type="text"
+                    className="search-conatain-input"
+                    placeholder="Chercher un livre..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)} // Mise à jour du terme de recherche
+                />
+            </div>
+
+            <div className="biblio-contain">
+                <div className="livres-grid">
+                    {livresActuels.length === 0 ? (
+                        <p>Aucun livre trouvé</p> // Affichage du message si aucun livre ne correspond
+                    ) : (
+                        livresActuels.map((livre) => (
+                            <LivreCard key={livre.id} livre={livre} />
+                        ))
+                    )}
+                </div>
+            </div>
+
+            <div className="pagination-buttons">
+                <button onClick={prevPage} disabled={currentPage === 1}>
+                    ← Précédente
+                </button>
+                <span>Page {currentPage} / {totalPages}</span>
+                <button onClick={nextPage} disabled={currentPage === totalPages}>
+                    Suivante →
+                </button>
+            </div>
+        </div>
+    );
 }
 
 export default Bibliotheque;

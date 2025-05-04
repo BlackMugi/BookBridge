@@ -24,13 +24,16 @@ function SidebarAdmin() {
             <Link to="/admin/dashboard">🏠 Dashboard</Link>
           </li>
           <li>
-            <Link to="/admin/ajouter-un-livre">➕ Ajouter Livre</Link>
-          </li>
-          <li>
             <Link to="/admin/gerer-un-livre">📚 Gérer Livres</Link>
           </li>
           <li>
+            <Link to="/admin/ajouter-un-livre">➕ Ajouter Livre</Link>
+          </li>
+          <li>
             <Link to="/admin/gerer-un-exemplaire">📦 Gérer Exemplaires</Link>
+          </li>
+          <li>
+            <Link to="/admin/ajouter-un-exemplaire">➕ Ajouter Exemplaire</Link>
           </li>
           <li>
             <Link to="/admin/gerer-role">👥 Gestion des Rôles</Link>

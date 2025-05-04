@@ -53,7 +53,7 @@ function Inscription() {
       if (response.ok) {
         setMessageSucces("Inscription réussie ! Vous allez être redirigé vers la page de connexion.");
         setTimeout(() => {
-          navigate("/authetification/connexion");
+          navigate("/authentification/connexion");
         }, 2000);
         setFormData({
           nom: "",
@@ -132,7 +132,7 @@ function Inscription() {
 
         <p className="auth-link">
           Vous avez déjà un compte ?{" "}
-          <Link to="/authetification/connexion">Connectez-vous ici</Link>
+          <Link to="/authentification/connexion">Connectez-vous ici</Link>
         </p>
       </form>
     </div>

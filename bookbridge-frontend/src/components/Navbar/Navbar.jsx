@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
 import "./Navbar.css";
 import Logo from '../../assets/images/LogoBookBridge.png';
 
@@ -24,12 +23,6 @@ function Navbar() {
       <Link className="Link" to="/">
         <img className="Logo" src={Logo} alt="Logo BookBridge" />
       </Link>
-      <div className="search-box">
-        <input type="text" className="search-input" placeholder="Chercher" />
-        <button className="search-btn">
-          <FaSearch />
-        </button>
-      </div>
       <nav>
         <Link className="Link" to="/">Accueil</Link>
         <Link className="Link" to="/bibliotheque">Bibliothèque</Link>

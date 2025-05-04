@@ -43,6 +43,7 @@ function Connexion() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("utilisateur", JSON.stringify(data.utilisateur));
       localStorage.setItem("role", data.utilisateur.role);
+      localStorage.setItem("utilisateurId", data.utilisateur.id);
 
       if (data.utilisateur.role === "bibliothecaire") {
         navigate("/admin/dashboard");
@@ -82,7 +83,7 @@ function Connexion() {
 
         <p className="auth-link">
           Vous n'avez pas de compte ?{" "}
-          <Link to="/authetification/inscription">Inscrivez-vous ici</Link>
+          <Link to="/authentification/inscription">Inscrivez-vous ici</Link>
         </p>
       </form>
     </div>

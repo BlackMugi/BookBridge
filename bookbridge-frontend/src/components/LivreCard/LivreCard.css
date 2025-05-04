@@ -1,0 +1,110 @@
+.livre-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 180px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.5rem;
+    flex-shrink: 0;
+}
+
+.livre-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-image-container {
+    width: 100%;
+    height: 135px;
+    overflow: hidden;
+}
+
+.livre-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.livre-card-content {
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.livre-titre {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+    color: white;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+}
+
+.livre-auteur {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn-voir-detail {
+    background: linear-gradient(135deg, #6e3aff, #d81cf5);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-voir-detail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d81cf5, #6e3aff);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.btn-voir-detail:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(216, 28, 245, 0.4);
+}
+
+.btn-voir-detail:hover::before {
+    opacity: 1;
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.btn-voir-detail:hover .btn-arrow {
+    transform: translateX(3px);
+}
