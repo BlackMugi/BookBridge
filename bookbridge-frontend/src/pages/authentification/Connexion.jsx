@@ -5,7 +5,7 @@ import "../../assets/styles/Auth.css";
 function Connexion() {
   const [formData, setFormData] = useState({
     email: "",
-    mot_de_passe: "", // changement ici
+    mot_de_passe: "",
   });
   const [erreur, setErreur] = useState("");
   const navigate = useNavigate();
@@ -20,6 +20,12 @@ function Connexion() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErreur("");
+
+
+    if (!formData.email || !formData.mot_de_passe) {
+      setErreur("Veuillez remplir tous les champs.");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:8080/api/utilisateurs/connexion", {

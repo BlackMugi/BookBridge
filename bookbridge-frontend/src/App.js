@@ -22,6 +22,7 @@ import AjouterExemplaire from "./pages/admin/AjouterExemplaire";
 import GererRoles from "./pages/admin/GererRoles";
 import ModifierLivre from "./pages/admin/ModifierLivre";
 import ModifierExemplaire from "./pages/admin/ModifierExemplaire";
+import GestionReservation from "./pages/admin/GestionReservation";
 
 //Nos Routes Pour l'Authentification
 import Inscription from "./pages/authentification/Inscription";
@@ -98,6 +99,10 @@ function App() {
           <Route path="/admin/gerer-role" element={
             <AdminRoute><GererRoles /></AdminRoute>
           } />
+          <Route path="/admin/gestion-reservation" element={
+            <AdminRoute><GestionReservation /></AdminRoute>
+          } />
+          
 
         </Routes>
       </main>

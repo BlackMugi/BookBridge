@@ -5,14 +5,27 @@ function SuiviStatut() {
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
-    // Simuler l'appel API (on remplacera plus tard par un vrai fetch)
-    const fakeReservations = [
-      { id: 1, livre: "Le Petit Prince", dateDebut: "2025-05-01", dateFin: "2025-05-10", statut: "En cours" },
-      { id: 2, livre: "L'Alchimiste", dateDebut: "2025-04-15", dateFin: "2025-04-25", statut: "Terminée" },
-      { id: 3, livre: "1984", dateDebut: "2025-05-05", dateFin: "2025-05-15", statut: "En attente" },
-    ];
-    setReservations(fakeReservations);
-  }, []);
+    const utilisateurId = localStorage.getItem("utilisateurId");
+  
+    if (!utilisateurId) {
+      console.error("Utilisateur non connecté.");
+      return;
+    }
+  
+    fetch(`http://localhost:8080/api/reservations/utilisateur/${utilisateurId}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Erreur lors du chargement des réservations.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setReservations(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);  
 
   return (
     <div className="suivi-container">
@@ -21,6 +34,8 @@ function SuiviStatut() {
         <thead>
           <tr>
             <th>Livre</th>
+            <th>Code Barre</th>
+            <th>État</th>
             <th>Date Début</th>
             <th>Date Fin</th>
             <th>Statut</th>
@@ -30,6 +45,8 @@ function SuiviStatut() {
           {reservations.map((res) => (
             <tr key={res.id}>
               <td>{res.livre}</td>
+              <td>{res.codeBarre}</td>
+              <td>{res.etatExemplaire}</td>
               <td>{res.dateDebut}</td>
               <td>{res.dateFin}</td>
               <td className={`statut ${res.statut.replace(" ", "-").toLowerCase()}`}>{res.statut}</td>

@@ -7,66 +7,77 @@ function Detail() {
   const navigate = useNavigate();
   const [jours, setJours] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState("");
+  const [popupMessage, setPopupMessage] = useState({ success: false, message: "" });
 
   const livre = state?.livre;
 
   const handleReserver = () => {
     const joursNum = parseInt(jours, 10);
 
+    // Vérification de la validité du nombre de jours
     if (!jours || isNaN(joursNum) || joursNum <= 0 || joursNum > 15) {
-      setPopupMessage("Veuillez entrer un nombre de jours valide (entre 1 et 15).");
+      setPopupMessage({ success: false, message: "Veuillez entrer un nombre de jours valide (entre 1 et 15)." });
       setShowPopup(true);
       return;
     }
 
+    // Vérification de la disponibilité d'un exemplaire
     const exemplaireDisponible = livre.exemplaires?.find(
       (ex) => ex.disponibilite === true || ex.disponibilite === 1
     );
 
     if (!exemplaireDisponible) {
-      setPopupMessage("Aucun exemplaire disponible pour ce livre.");
+      setPopupMessage({ success: false, message:"Aucun exemplaire disponible pour ce livre."});
       setShowPopup(true);
       return;
     }
 
+    // Récupérer l'ID utilisateur depuis localStorage
     const utilisateurId = localStorage.getItem("utilisateurId");
 
+    // Vérification si l'utilisateur est connecté
     if (!utilisateurId) {
-      setPopupMessage("Utilisateur non connecté.");
+      setPopupMessage({ success: false, message:"Utilisateur non connecté."});
       setShowPopup(true);
       return;
     }
 
+    // Envoi de la requête de réservation
     fetch("http://localhost:8080/api/reservations", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body: new URLSearchParams({
-        exemplaireId: exemplaireDisponible.id,
-        utilisateurId,
+      body: JSON.stringify({
+        livreId: livre.id,
+        utilisateurId: utilisateurId,
         jours: joursNum,
-      }),
+      }),      
     })
+
       .then((res) => {
-        if (!res.ok) throw new Error("Erreur lors de la réservation.");
+        if (!res.ok) {
+          throw new Error("Erreur lors de la réservation.");
+        }
         return res.json();
       })
+
+
       .then((data) => {
-        setPopupMessage(`Réservation réussie jusqu'au ${data.dateFin}`);
+        setPopupMessage({
+          success: true,
+          message: `Réservation réussie jusqu'au ${data.dateFin}`,
+        });
         setShowPopup(true);
       })
+      
       .catch((err) => {
         console.error(err);
-        setPopupMessage("Échec de la réservation. Veuillez réessayer.");
+        setPopupMessage({ success: false, message:"Échec de la réservation. Veuillez réessayer."});
         setShowPopup(true);
       });
   };
 
-  const closePopup = () => {
-    setShowPopup(false);
-  };
 
   if (!livre) {
     return (
@@ -119,8 +130,20 @@ function Detail() {
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup-box">
-            <p>{popupMessage}</p>
-            <button onClick={closePopup}>Fermer</button>
+            <p className="popup-icon">
+              {popupMessage.success ? "✅" : "❌"}
+            </p>
+            <p>{popupMessage.message}</p>
+            <button
+              onClick={() => {
+                setShowPopup(false);
+                if (popupMessage.success) {
+                  navigate("/suivi-du-statut");
+                }
+              }}
+            >
+              OK
+            </button>
           </div>
         </div>
       )}
